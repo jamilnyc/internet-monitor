@@ -7,28 +7,63 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --bg: #0f1117;
+    --text: #e0e0e0;
+    --text-heading: #fff;
+    --card-bg: #1a1d28;
+    --card-border: #2a2d3a;
+    --btn-bg: #252836;
+    --btn-border: #3a3d4a;
+    --btn-hover: #333649;
+    --btn-active: #3e4258;
+    --muted: #888;
+    --muted-dim: #555;
+    --url-text: #ccc;
+    --scrollbar-thumb: #333;
+    --toggle-hover: #fff;
+  }
+
+  body.light {
+    --bg: #f5f5f7;
+    --text: #333;
+    --text-heading: #111;
+    --card-bg: #fff;
+    --card-border: #ddd;
+    --btn-bg: #e8e8ec;
+    --btn-border: #ccc;
+    --btn-hover: #dcdce0;
+    --btn-active: #d0d0d4;
+    --muted: #777;
+    --muted-dim: #aaa;
+    --url-text: #555;
+    --scrollbar-thumb: #ccc;
+    --toggle-hover: #111;
+  }
+
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: #0f1117;
-    color: #e0e0e0;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem 1rem;
+    transition: background 0.3s, color 0.3s;
   }
 
-  h1 { font-size: 1.4rem; font-weight: 600; margin-bottom: 1.5rem; color: #fff; }
+  h1 { font-size: 1.4rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-heading); }
 
   .status-card {
-    background: #1a1d28;
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 2.5rem 3rem;
     text-align: center;
     width: 100%;
     max-width: 480px;
     margin-bottom: 1.5rem;
-    border: 1px solid #2a2d3a;
+    border: 1px solid var(--card-border);
   }
 
   .status-dot {
@@ -66,7 +101,7 @@
 
   .status-duration, .status-countdown {
     font-size: 0.9rem;
-    color: #888;
+    color: var(--muted);
     margin-top: 0.3rem;
   }
 
@@ -79,17 +114,17 @@
 
   button {
     padding: 0.55rem 1.2rem;
-    border: 1px solid #3a3d4a;
+    border: 1px solid var(--btn-border);
     border-radius: 8px;
-    background: #252836;
-    color: #e0e0e0;
+    background: var(--btn-bg);
+    color: var(--text);
     font-size: 0.85rem;
     cursor: pointer;
     transition: background 0.2s;
   }
 
-  button:hover { background: #333649; }
-  button:active { background: #3e4258; }
+  button:hover { background: var(--btn-hover); }
+  button:active { background: var(--btn-active); }
   button.danger { border-color: #7f1d1d; color: #fca5a5; }
   button.danger:hover { background: #450a0a; }
 
@@ -120,10 +155,10 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.6rem 0.9rem;
-    background: #1a1d28;
+    background: var(--card-bg);
     border-radius: 8px;
     font-size: 0.82rem;
-    border: 1px solid #2a2d3a;
+    border: 1px solid var(--card-border);
   }
 
   .history-entry .dot {
@@ -136,20 +171,20 @@
   .history-entry .dot.online { background: #22c55e; }
   .history-entry .dot.offline { background: #ef4444; }
 
-  .history-entry .time { color: #888; white-space: nowrap; }
+  .history-entry .time { color: var(--muted); white-space: nowrap; }
   .history-entry .label { flex: 1; }
-  .history-entry .duration { color: #888; white-space: nowrap; }
+  .history-entry .duration { color: var(--muted); white-space: nowrap; }
 
   .empty-history {
     text-align: center;
-    color: #555;
+    color: var(--muted-dim);
     padding: 2rem;
     font-size: 0.9rem;
   }
 
   .history-list::-webkit-scrollbar { width: 6px; }
   .history-list::-webkit-scrollbar-track { background: transparent; }
-  .history-list::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  .history-list::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
 
   .endpoints-section {
     width: 100%;
@@ -163,7 +198,7 @@
     gap: 0.5rem;
     background: none;
     border: none;
-    color: #aaa;
+    color: var(--muted);
     font-size: 0.9rem;
     cursor: pointer;
     padding: 0.4rem 0;
@@ -171,7 +206,7 @@
     text-align: left;
   }
 
-  .endpoints-toggle:hover { color: #fff; background: none; }
+  .endpoints-toggle:hover { color: var(--toggle-hover); background: none; }
   .endpoints-toggle:active { background: none; }
 
   .endpoints-toggle .arrow {
@@ -196,10 +231,10 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.5rem 0.9rem;
-    background: #1a1d28;
+    background: var(--card-bg);
     border-radius: 8px;
     font-size: 0.82rem;
-    border: 1px solid #2a2d3a;
+    border: 1px solid var(--card-border);
   }
 
   .endpoint-entry .dot {
@@ -211,13 +246,69 @@
 
   .endpoint-entry .dot.reachable { background: #22c55e; }
   .endpoint-entry .dot.unreachable { background: #ef4444; }
-  .endpoint-entry .dot.pending { background: #555; }
+  .endpoint-entry .dot.pending { background: var(--muted-dim); }
 
-  .endpoint-entry .url { flex: 1; color: #ccc; word-break: break-all; }
-  .endpoint-entry .ep-status { color: #888; white-space: nowrap; }
+  .endpoint-entry .url { flex: 1; color: var(--url-text); word-break: break-all; }
+  .endpoint-entry .ep-status { color: var(--muted); white-space: nowrap; }
+
+  .top-controls {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .theme-toggle {
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .theme-toggle:hover { background: var(--btn-hover); }
+
+  .tooltip-wrap {
+    position: relative;
+  }
+
+  .tooltip-wrap::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+  }
+
+  .tooltip-wrap:hover::after {
+    opacity: 1;
+  }
 </style>
 </head>
 <body>
+
+<div class="top-controls">
+  <span class="tooltip-wrap" data-tooltip="Test notification sound"><button class="theme-toggle" onclick="playReconnectSound()">&#128264;</button></span>
+  <span class="tooltip-wrap" data-tooltip="Toggle light/dark mode"><button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">&#9790;</button></span>
+</div>
 
 <h1>Internet Connectivity Monitor</h1>
 
@@ -248,6 +339,8 @@
     <div class="empty-history">No events yet.</div>
   </div>
 </div>
+
+<p style="margin-top:2rem;font-size:0.8rem;color:var(--muted);text-align:center;font-style:italic;">Dedicated to my beloved wife, Dr. Nusrat Jahan.</p>
 
 <script>
 const CHECK_INTERVAL = 4 * 60 * 1000; // 4 minutes
@@ -518,6 +611,21 @@ function restoreState() {
 }
 
 // --- Init ---
+
+// --- Theme ---
+
+function applyTheme(theme) {
+  document.body.classList.toggle('light', theme === 'light');
+  document.getElementById('themeToggle').innerHTML = theme === 'light' ? '&#9728;' : '&#9790;';
+}
+
+function toggleTheme() {
+  const next = document.body.classList.contains('light') ? 'dark' : 'light';
+  localStorage.setItem('internet-monitor-theme', next);
+  applyTheme(next);
+}
+
+applyTheme(localStorage.getItem('internet-monitor-theme') || 'dark');
 
 restoreState();
 renderEndpoints();
